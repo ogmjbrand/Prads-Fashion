@@ -1,0 +1,113 @@
+import { Product } from '@/types/product';
+
+// PRADSFASHION REAL PRODUCTS - Handcrafted Premium Bags
+// Owner: Angel Anifowoshe
+export const products: Product[] = [
+  {
+    id: '1',
+    name: 'Navy & Black Striped Leather Bag',
+    price: 89.99,
+    description: 'Elegant structured shoulder bag with vertical striped premium woven fabric in navy and black with tan accents. Silver hardware and flap closure. Perfect for daily elegance.',
+    category: 'Bags',
+    image: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=80',
+    ],
+    sizes: ['One Size'],
+    colors: ['Navy & Black'],
+    inStock: true,
+    rating: 4.9,
+    reviews: 16,
+    featured: true,
+  },
+  {
+    id: '2',
+    name: 'Red & White Striped Clutch',
+    price: 74.99,
+    description: 'Bold and sophisticated clutch with vertical red and white stripes. Clean lines, premium woven textile, black hardware. Statement piece for any occasion.',
+    category: 'Bags',
+    image: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=80',
+    ],
+    sizes: ['One Size'],
+    colors: ['Red & White'],
+    inStock: true,
+    rating: 4.8,
+    reviews: 12,
+    featured: true,
+  },
+  {
+    id: '3',
+    name: 'Multicolor Rainbow Striped Bag',
+    price: 94.99,
+    description: 'Vibrant statement bag featuring dynamic vertical stripes in yellow, blue, green, white, and burgundy. Eye-catching design with premium silver hardware. Express your unique style.',
+    category: 'Bags',
+    image: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=80',
+    ],
+    sizes: ['One Size'],
+    colors: ['Multicolor'],
+    inStock: true,
+    rating: 4.9,
+    reviews: 18,
+    featured: true,
+  },
+  {
+    id: '4',
+    name: 'Purple & Lavender Striped Handbag',
+    price: 84.99,
+    description: 'Elegant handbag with soft purple and lavender tones mixed with black and green stripes. Premium woven textile construction with silver hardware. Timeless and versatile.',
+    category: 'Bags',
+    image: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=80',
+    ],
+    sizes: ['One Size'],
+    colors: ['Purple & Lavender'],
+    inStock: true,
+    rating: 4.7,
+    reviews: 14,
+    featured: true,
+  },
+  {
+    id: '5',
+    name: 'Green Striped Textile Tote',
+    price: 99.99,
+    description: 'Spacious tote bag with rich olive green, burgundy, mustard yellow, navy, and grey vertical stripes. Matching green padded handles. Perfect for everyday and professional use.',
+    category: 'Bags',
+    image: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=80',
+    ],
+    sizes: ['One Size'],
+    colors: ['Green Multi-Stripe'],
+    inStock: true,
+    rating: 4.9,
+    reviews: 22,
+    featured: true,
+  },
+  {
+    id: '6',
+    name: 'Blue & Navy Striped Professional Tote',
+    price: 89.99,
+    description: 'Structured tote with striking vertical stripes in bright blue, navy, and white. Padded double handles. Premium woven textile. Ideal for work and travel.',
+    category: 'Bags',
+    image: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=80',
+    ],
+    sizes: ['One Size'],
+    colors: ['Blue & Navy'],
+    inStock: true,
+    rating: 4.8,
+    reviews: 19,
+    featured: true,
+  },
+];
+
+export const categories = [
+  'All',
+  'Bags',
+];
