@@ -88,7 +88,7 @@ function ShopContent() {
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
             {/* Sidebar Filters */}
             <div className="lg:col-span-1">
-              <div className="bg-brand-cream p-6 rounded-lg lg:sticky lg:top-24">
+              <div className="bg-brand-cream p-6 lg:sticky lg:top-24">
                 <h3 className="font-bold text-lg mb-6">Filter</h3>
 
                 {/* Search */}
@@ -101,7 +101,7 @@ function ShopContent() {
                       value={search}
                       onChange={(e) => setSearch(e.target.value)}
                       placeholder="Search products..."
-                      className="w-full pl-9 pr-3 py-2 border border-brand-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-brand-gold text-sm"
+                      className="w-full pl-9 pr-3 py-2 border border-brand-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-gold text-sm"
                     />
                   </div>
                 </div>
@@ -175,7 +175,7 @@ function ShopContent() {
                 <select
                   value={sort}
                   onChange={(e) => setSort(e.target.value as SortOption)}
-                  className="w-full sm:w-auto px-4 py-2 border border-brand-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-brand-gold"
+                  className="w-full sm:w-auto px-4 py-2 border border-brand-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-gold"
                 >
                   <option value="featured">Sort by: Featured</option>
                   <option value="price-asc">Price: Low to High</option>
@@ -192,7 +192,7 @@ function ShopContent() {
                   ))}
                 </div>
               ) : (
-                <div className="text-center py-16 bg-brand-cream rounded-lg">
+                <div className="text-center py-16 bg-brand-cream">
                   <p className="text-brand-gray-600">No products match your filters.</p>
                 </div>
               )}

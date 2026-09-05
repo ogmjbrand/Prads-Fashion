@@ -6,22 +6,22 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-brand-black text-brand-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+    <footer className="bg-brand-black text-brand-white border-t border-brand-gold/30">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div>
-            <div className="text-lg font-bold mb-4">
-              <span className="text-brand-gold">PRADS</span>FASHION
+            <div className="font-serif italic text-xl font-semibold mb-4">
+              <span className="text-brand-gold">Prads</span>Fashion
             </div>
-            <p className="text-brand-gray-400 text-sm">
-              Premium fashion for the confident individual.
+            <p className="text-brand-gray-400 text-sm leading-relaxed">
+              Handcrafted bags and Ankara-print fashion for the confident individual.
             </p>
           </div>
 
           {/* Navigation */}
           <div>
-            <h3 className="text-sm font-bold mb-4 uppercase tracking-wide">Shop</h3>
+            <h3 className="text-xs font-semibold mb-5 uppercase tracking-[0.15em] text-brand-gold">Shop</h3>
             <ul className="space-y-2">
               <li>
                 <Link href="/shop" className="text-brand-gray-400 hover:text-brand-white text-sm">
@@ -43,7 +43,7 @@ export default function Footer() {
 
           {/* Company */}
           <div>
-            <h3 className="text-sm font-bold mb-4 uppercase tracking-wide">Company</h3>
+            <h3 className="text-xs font-semibold mb-5 uppercase tracking-[0.15em] text-brand-gold">Company</h3>
             <ul className="space-y-2">
               <li>
                 <Link href="/about" className="text-brand-gray-400 hover:text-brand-white text-sm">
@@ -65,7 +65,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="text-sm font-bold mb-4 uppercase tracking-wide">Contact</h3>
+            <h3 className="text-xs font-semibold mb-5 uppercase tracking-[0.15em] text-brand-gold">Contact</h3>
             <div className="space-y-3">
               <a
                 href={`https://wa.me/${BRAND.whatsapp.replace('+', '')}`}

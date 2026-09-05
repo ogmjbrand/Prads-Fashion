@@ -138,7 +138,7 @@ export default function ContactPageClient() {
             </div>
 
             {/* Contact Form */}
-            <div className="lg:col-span-2 bg-brand-cream p-8 rounded-lg">
+            <div className="lg:col-span-2 bg-brand-cream p-8">
               <h2 className="text-2xl font-bold mb-6">Send us a Message</h2>
 
               {sent ? (
@@ -198,7 +198,7 @@ export default function ContactPageClient() {
                       rows={6}
                       value={form.message}
                       onChange={handleField('message')}
-                      className="w-full px-4 py-2 border border-brand-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-brand-gold"
+                      className="w-full px-4 py-2 border border-brand-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-gold"
                     />
                     {errors.message && <p className="text-xs text-red-500 mt-1">{errors.message}</p>}
                   </div>
@@ -217,7 +217,7 @@ export default function ContactPageClient() {
           </div>
 
           {/* FAQ Section */}
-          <div className="bg-brand-black text-brand-white p-8 rounded-lg">
+          <div className="bg-brand-black text-brand-white p-8">
             <h2 className="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
 
             <div className="space-y-6">

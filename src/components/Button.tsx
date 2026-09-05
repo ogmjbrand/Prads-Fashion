@@ -32,18 +32,19 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(function Button(
     else if (forwardedRef) forwardedRef.current = node;
   };
 
-  const baseClasses = 'font-semibold transition-colors duration-200 rounded disabled:opacity-50 disabled:cursor-not-allowed';
+  const baseClasses =
+    'font-semibold uppercase tracking-[0.12em] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed';
 
   const variantClasses = {
     primary: 'bg-brand-black text-brand-white hover:bg-brand-gray-800',
-    secondary: 'bg-brand-gold text-brand-black hover:bg-brand-gray-500',
-    outline: 'border-2 border-brand-black text-brand-black hover:bg-brand-black hover:text-brand-white',
+    secondary: 'bg-brand-gold text-brand-black hover:bg-brand-black hover:text-brand-white',
+    outline: 'border border-brand-black text-brand-black hover:bg-brand-black hover:text-brand-white',
   };
 
   const sizeClasses = {
-    sm: 'px-4 py-2 text-sm',
-    md: 'px-6 py-3 text-base',
-    lg: 'px-8 py-4 text-lg',
+    sm: 'px-5 py-2.5 text-[11px]',
+    md: 'px-7 py-3.5 text-xs',
+    lg: 'px-9 py-4 text-sm',
   };
 
   const widthClass = fullWidth ? 'w-full' : '';
