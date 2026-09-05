@@ -2,21 +2,21 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'PRADSFASHION | Premium Fashion',
-  description: 'Discover premium fashion at PRADSFASHION. Elegant, modern designs crafted for confident individuals.',
+  title: 'PRADSFASHION | Handcrafted Bags & Ankara Fashion',
+  description: 'Discover PRADSFASHION’s handcrafted bags and Ankara-print pieces, made by Angel Anifowoshe.',
   metadataBase: new URL('https://prads-fashion.com'),
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: 'https://prads-fashion.com',
-    title: 'PRADSFASHION | Premium Fashion',
-    description: 'Discover premium fashion at PRADSFASHION. Elegant, modern designs crafted for confident individuals.',
+    title: 'PRADSFASHION | Handcrafted Bags & Ankara Fashion',
+    description: 'Discover PRADSFASHION’s handcrafted bags and Ankara-print pieces.',
     images: [
       {
-        url: '/og-image.jpg',
+        url: '/products/flap-bag-rainbow-stripe.webp',
         width: 1200,
-        height: 630,
-        alt: 'PRADSFASHION',
+        height: 1200,
+        alt: 'PRADSFASHION handcrafted rainbow stripe flap bag',
       },
     ],
   },
@@ -36,7 +36,6 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <meta name="theme-color" content="#0a0a0a" />
-        <link rel="icon" href="/favicon.ico" />
       </head>
       <body className="bg-brand-white text-brand-black antialiased">
         {children}
