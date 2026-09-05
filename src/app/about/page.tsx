@@ -1,7 +1,14 @@
+import type { Metadata } from 'next';
+import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Button from '@/components/Button';
 import { BRAND } from '@/utils/constants';
+
+export const metadata: Metadata = {
+  title: 'About | PRADSFASHION',
+  description: 'The story behind PRADSFASHION, founded by Angel Anifowoshe.',
+};
 
 export default function AboutPage() {
   return (
@@ -49,7 +56,7 @@ export default function AboutPage() {
             <div>
               <h3 className="text-xl font-bold mb-3">Style</h3>
               <p className="text-brand-gray-600">
-                Fashion that's confident, elegant, and uniquely yours.
+                Fashion that&apos;s confident, elegant, and uniquely yours.
               </p>
             </div>
             <div>
@@ -64,15 +71,21 @@ export default function AboutPage() {
           <div className="bg-brand-cream p-8 rounded-lg text-center">
             <h3 className="text-2xl font-bold mb-4">Get in Touch</h3>
             <p className="text-brand-gray-700 mb-6">
-              Have questions? We'd love to hear from you. Reach out anytime.
+              Have questions? We&apos;d love to hear from you. Reach out anytime.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button onClick={() => (window.location.href = `https://wa.me/${BRAND.whatsapp.replace('+', '')}`)}>
-                WhatsApp: {BRAND.whatsapp}
-              </Button>
-              <Button variant="outline" onClick={() => (window.location.href = '/contact')}>
-                Contact Form
-              </Button>
+              <a
+                href={`https://wa.me/${BRAND.whatsapp.replace('+', '')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button className="w-full">WhatsApp: {BRAND.whatsapp}</Button>
+              </a>
+              <Link href="/contact">
+                <Button variant="outline" className="w-full">
+                  Contact Form
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

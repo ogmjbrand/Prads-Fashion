@@ -3,7 +3,7 @@ import Footer from '@/components/Footer';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 import { BRAND, SOCIAL_MEDIA } from '@/utils/constants';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone } from 'lucide-react';
 
 export default function ContactPage() {
   return (
@@ -14,7 +14,7 @@ export default function ContactPage() {
         <div className="bg-brand-cream border-b border-brand-gray-200">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
             <h1 className="text-3xl sm:text-4xl font-bold mb-2">Contact Us</h1>
-            <p className="text-brand-gray-600">We'd love to hear from you. Reach out anytime.</p>
+            <p className="text-brand-gray-600">We&apos;d love to hear from you. Reach out anytime.</p>
           </div>
         </div>
 
@@ -48,7 +48,7 @@ export default function ContactPage() {
                   <span>Email</span>
                 </h3>
                 <p className="text-brand-gray-600 mb-3">
-                  Send us an email and we'll get back to you soon.
+                  Send us an email and we&apos;ll get back to you soon.
                 </p>
                 <a
                   href="mailto:contact@pradsfashion.com"

@@ -1,33 +1,25 @@
 'use client';
 
+import Link from 'next/link';
+import Image from 'next/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Button from '@/components/Button';
-import Input from '@/components/Input';
 import { useCart } from '@/hooks/useCart';
 import { products } from '@/data/products';
 import { formatPrice, generateWhatsAppMessage, generateWhatsAppLink } from '@/utils/formatting';
 import { BRAND, SHIPPING_COST, FREE_SHIPPING_THRESHOLD, TAX_RATE } from '@/utils/constants';
 import { Trash2, Plus, Minus } from 'lucide-react';
-import { useState } from 'react';
 
 export default function CartPage() {
-  const { items, removeItem, updateQuantity, clearCart, isHydrated } = useCart();
-  const [showCheckout, setShowCheckout] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    address: '',
-    city: '',
-    country: '',
-    notes: '',
-  });
+  const { items, removeItem, updateQuantity, isHydrated } = useCart();
 
   const cartItems = items.map((item) => {
     const product = products.find((p) => p.id === item.productId);
     return { ...item, product };
   });
+
+  const hasPriceOnRequest = cartItems.some((item) => item.product && item.product.price === null);
 
   const subtotal = cartItems.reduce((sum, item) => {
     return sum + (item.product?.price || 0) * item.quantity;
@@ -41,10 +33,10 @@ export default function CartPage() {
     const orderItems = cartItems.map((item) => ({
       name: item.product?.name || 'Unknown',
       quantity: item.quantity,
-      price: item.product?.price || 0,
+      price: item.product?.price ?? null,
     }));
 
-    const message = generateWhatsAppMessage(orderItems, total, formData.name || 'Valued Customer');
+    const message = generateWhatsAppMessage(orderItems, total);
     const link = generateWhatsAppLink(message, BRAND.whatsapp);
     window.open(link, '_blank');
   };
@@ -93,12 +85,16 @@ export default function CartPage() {
                       className="flex gap-4 border border-brand-gray-200 rounded-lg p-4"
                     >
                       {/* Image */}
-                      <div className="w-24 h-24 bg-brand-cream rounded overflow-hidden flex-shrink-0">
-                        <img
-                          src={item.product?.image}
-                          alt={item.product?.name}
-                          className="w-full h-full object-cover"
-                        />
+                      <div className="relative w-24 h-24 bg-brand-cream rounded overflow-hidden flex-shrink-0">
+                        {item.product?.image && (
+                          <Image
+                            src={item.product.image}
+                            alt={item.product.name}
+                            fill
+                            sizes="96px"
+                            className="object-cover"
+                          />
+                        )}
                       </div>
 
                       {/* Details */}
@@ -186,20 +182,23 @@ export default function CartPage() {
                     <span>{formatPrice(total)}</span>
                   </div>
 
+                  {hasPriceOnRequest && (
+                    <p className="text-xs text-brand-gray-600 mb-4">
+                      One or more items are price-on-request — final total will be confirmed via WhatsApp.
+                    </p>
+                  )}
+
                   {subtotal < FREE_SHIPPING_THRESHOLD && (
                     <p className="text-xs text-brand-gray-600 mb-4">
                       Free shipping on orders over {formatPrice(FREE_SHIPPING_THRESHOLD)}
                     </p>
                   )}
 
-                  <Button
-                    variant="primary"
-                    fullWidth
-                    onClick={() => setShowCheckout(true)}
-                    className="mb-3"
-                  >
-                    Proceed to Checkout
-                  </Button>
+                  <Link href="/checkout" className="block mb-3">
+                    <Button variant="primary" fullWidth>
+                      Proceed to Checkout
+                    </Button>
+                  </Link>
 
                   <Button
                     variant="secondary"
@@ -211,68 +210,6 @@ export default function CartPage() {
                 </div>
               </div>
             </div>
-
-            {/* Checkout Form */}
-            {showCheckout && (
-              <div className="mt-12 bg-brand-cream p-8 rounded-lg">
-                <h2 className="text-2xl font-bold mb-6">Checkout</h2>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-                  <Input
-                    label="Full Name"
-                    placeholder="Enter your full name"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  />
-                  <Input
-                    label="Email"
-                    type="email"
-                    placeholder="Enter your email"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  />
-                  <Input
-                    label="Phone Number"
-                    placeholder="Enter your phone number"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  />
-                  <Input
-                    label="Address"
-                    placeholder="Enter your address"
-                    value={formData.address}
-                    onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                  />
-                  <Input
-                    label="City"
-                    placeholder="Enter your city"
-                    value={formData.city}
-                    onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                  />
-                  <Input
-                    label="Country"
-                    placeholder="Enter your country"
-                    value={formData.country}
-                    onChange={(e) => setFormData({ ...formData, country: e.target.value })}
-                  />
-                </div>
-
-                <div className="mb-6">
-                  <label className="block text-sm font-medium mb-2">Order Notes (Optional)</label>
-                  <textarea
-                    placeholder="Add any special requests or notes"
-                    value={formData.notes}
-                    onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                    className="w-full px-4 py-2 border border-brand-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-brand-gold"
-                    rows={3}
-                  />
-                </div>
-
-                <Button variant="secondary" fullWidth onClick={handleWhatsAppOrder}>
-                  Complete Order via WhatsApp
-                </Button>
-              </div>
-            )}
           </div>
         )}
       </main>
