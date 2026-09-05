@@ -68,7 +68,7 @@ export default function AboutPage() {
           </div>
 
           {/* Contact CTA */}
-          <div className="bg-brand-cream p-8 rounded-lg text-center">
+          <div className="bg-brand-cream p-8 text-center">
             <h3 className="text-2xl font-bold mb-4">Get in Touch</h3>
             <p className="text-brand-gray-700 mb-6">
               Have questions? We&apos;d love to hear from you. Reach out anytime.

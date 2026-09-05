@@ -38,7 +38,7 @@ function Loader() {
 
 export default function ProductViewer3D({ image }: { image: string }) {
   return (
-    <div className="relative w-full h-full bg-brand-cream rounded-lg overflow-hidden">
+    <div className="relative w-full h-full bg-brand-cream overflow-hidden">
       <Suspense fallback={<Loader />}>
         <Canvas camera={{ position: [0, 0, 4], fov: 40 }} gl={{ antialias: true }}>
           <ambientLight intensity={0.9} />

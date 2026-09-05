@@ -9,13 +9,13 @@ export default function Input({ label, error, className = '', ...props }: InputP
   return (
     <div className="w-full">
       {label && (
-        <label className="block text-sm font-medium mb-2 text-brand-black">
+        <label className="block text-xs font-semibold uppercase tracking-[0.1em] mb-2 text-brand-gray-600">
           {label}
         </label>
       )}
       <input
-        className={`w-full px-4 py-2 border border-brand-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-transparent transition-all ${
-          error ? 'border-red-500 focus:ring-red-500' : ''
+        className={`w-full px-4 py-3 bg-transparent border-b border-brand-gray-300 focus:outline-none focus:border-brand-gold transition-colors ${
+          error ? 'border-red-500 focus:border-red-500' : ''
         } ${className}`}
         {...props}
       />

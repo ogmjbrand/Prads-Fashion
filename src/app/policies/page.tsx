@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 function PlaceholderNotice() {
   return (
-    <p className="text-sm bg-brand-cream border border-brand-gray-200 rounded-lg px-4 py-3 text-brand-gray-600">
+    <p className="text-sm bg-brand-cream border border-brand-gray-200 px-4 py-3 text-brand-gray-600">
       This section is a placeholder. Final policy details will be supplied by {BRAND.owner} and
       published here before the store accepts real orders.
     </p>

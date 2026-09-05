@@ -225,7 +225,7 @@ export default function CheckoutPageClient() {
                     placeholder="Add any special requests or notes"
                     value={form.notes}
                     onChange={handleField('notes')}
-                    className="w-full px-4 py-2 border border-brand-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-brand-gold"
+                    className="w-full px-4 py-2 border border-brand-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-gold"
                     rows={3}
                   />
                 </div>
@@ -236,7 +236,7 @@ export default function CheckoutPageClient() {
 
             {/* Order summary */}
             <div className="lg:col-span-1">
-              <div className="bg-brand-cream p-6 rounded-lg sticky top-24">
+              <div className="bg-brand-cream p-6 sticky top-24">
                 <h3 className="font-bold text-lg mb-6">Order Summary</h3>
                 <div className="space-y-4 mb-6 border-b pb-6 max-h-64 overflow-y-auto">
                   {cartItems.map((item) => (

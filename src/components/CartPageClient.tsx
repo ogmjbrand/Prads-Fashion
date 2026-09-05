@@ -82,7 +82,7 @@ export default function CartPageClient() {
                   {cartItems.map((item) => (
                     <div
                       key={`${item.productId}-${item.size}-${item.color}`}
-                      className="flex gap-4 border border-brand-gray-200 rounded-lg p-4"
+                      className="flex gap-4 border border-brand-gray-200 p-4"
                     >
                       {/* Image */}
                       <div className="relative w-24 h-24 bg-brand-cream rounded overflow-hidden flex-shrink-0">
@@ -159,7 +159,7 @@ export default function CartPageClient() {
 
               {/* Order Summary */}
               <div className="lg:col-span-1">
-                <div className="bg-brand-cream p-6 rounded-lg sticky top-24">
+                <div className="bg-brand-cream p-6 sticky top-24">
                   <h3 className="font-bold text-lg mb-6">Order Summary</h3>
 
                   {hasPriceOnRequest ? (

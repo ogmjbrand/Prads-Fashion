@@ -135,7 +135,7 @@ export default function Home() {
                 <Link
                   key={category.name}
                   href={`/shop?category=${encodeURIComponent(category.name)}`}
-                  className="group overflow-hidden rounded-lg block"
+                  className="group overflow-hidden block"
                 >
                   <div className="relative h-64 overflow-hidden">
                     <Image
@@ -223,7 +223,7 @@ export default function Home() {
               <p className="text-brand-gray-600">What our customers are saying</p>
             </div>
 
-            <div className="bg-brand-cream p-10 rounded-lg text-center max-w-2xl mx-auto">
+            <div className="bg-brand-cream p-10 text-center max-w-2xl mx-auto">
               <p className="text-brand-gray-700 leading-relaxed">
                 We&apos;re just getting started — customer reviews will appear here as PRADSFASHION
                 grows. Shopped with us already? Share your experience via WhatsApp and we may
@@ -263,7 +263,7 @@ export default function Home() {
             {/* Social Grid Placeholder */}
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
               {[...Array(8)].map((_, i) => (
-                <div key={i} className="bg-brand-gray-300 aspect-square rounded-lg" />
+                <div key={i} className="bg-brand-gray-300 aspect-square" />
               ))}
             </div>
           </div>

@@ -11,7 +11,7 @@
  */
 export default function PaymentGateway() {
   return (
-    <div className="border border-dashed border-brand-gray-300 rounded-lg p-6 bg-brand-gray-50">
+    <div className="border border-dashed border-brand-gray-300 p-6 bg-brand-gray-50">
       <div className="flex items-center justify-between mb-2">
         <h3 className="font-semibold">Pay by Card</h3>
         <span className="text-xs font-semibold uppercase tracking-wide text-brand-gray-500 bg-brand-gray-200 px-2 py-1 rounded">

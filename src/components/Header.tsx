@@ -24,34 +24,34 @@ export default function Header() {
   }, [count, isHydrated]);
 
   return (
-    <header className="sticky top-0 z-50 bg-brand-white border-b border-brand-gray-200">
+    <header className="sticky top-0 z-50 bg-brand-white/90 backdrop-blur-md border-b border-brand-gray-200/70">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
-            <div className="text-xl sm:text-2xl font-bold tracking-tight">
-              <span className="text-brand-gold">PRADS</span>
-              <span className="text-brand-black">FASHION</span>
+            <div className="font-serif text-xl sm:text-2xl font-semibold tracking-tight italic">
+              <span className="text-brand-gold">Prads</span>
+              <span className="text-brand-black">Fashion</span>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-10">
             <Link
               href="/shop"
-              className="text-sm font-medium hover:text-brand-gold transition-colors"
+              className="link-underline text-xs font-semibold uppercase tracking-[0.15em] hover:text-brand-gold transition-colors"
             >
               Shop
             </Link>
             <Link
               href="/about"
-              className="text-sm font-medium hover:text-brand-gold transition-colors"
+              className="link-underline text-xs font-semibold uppercase tracking-[0.15em] hover:text-brand-gold transition-colors"
             >
               About
             </Link>
             <Link
               href="/contact"
-              className="text-sm font-medium hover:text-brand-gold transition-colors"
+              className="link-underline text-xs font-semibold uppercase tracking-[0.15em] hover:text-brand-gold transition-colors"
             >
               Contact
             </Link>
@@ -91,24 +91,24 @@ export default function Header() {
         {/* Mobile Navigation */}
         {isOpen && (
           <div className="md:hidden border-t border-brand-gray-200">
-            <div className="px-2 pt-2 pb-4 space-y-1">
+            <div className="px-2 pt-3 pb-5 space-y-1">
               <Link
                 href="/shop"
-                className="block px-3 py-2 text-sm font-medium hover:bg-brand-cream rounded"
+                className="block px-3 py-2.5 text-xs font-semibold uppercase tracking-[0.15em] hover:bg-brand-cream"
                 onClick={() => setIsOpen(false)}
               >
                 Shop
               </Link>
               <Link
                 href="/about"
-                className="block px-3 py-2 text-sm font-medium hover:bg-brand-cream rounded"
+                className="block px-3 py-2.5 text-xs font-semibold uppercase tracking-[0.15em] hover:bg-brand-cream"
                 onClick={() => setIsOpen(false)}
               >
                 About
               </Link>
               <Link
                 href="/contact"
-                className="block px-3 py-2 text-sm font-medium hover:bg-brand-cream rounded"
+                className="block px-3 py-2.5 text-xs font-semibold uppercase tracking-[0.15em] hover:bg-brand-cream"
                 onClick={() => setIsOpen(false)}
               >
                 Contact

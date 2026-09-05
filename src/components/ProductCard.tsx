@@ -11,33 +11,38 @@ interface ProductCardProps {
 export default function ProductCard({ product }: ProductCardProps) {
   return (
     <Link href={`/product/${product.id}`}>
-      <div className="group cursor-pointer">
+      <div className="group cursor-pointer transition-transform duration-300 hover:-translate-y-1">
         {/* Image Container */}
-        <div className="relative mb-4 bg-brand-cream overflow-hidden aspect-square">
+        <div className="relative mb-4 bg-brand-cream overflow-hidden aspect-square shadow-sm group-hover:shadow-xl transition-shadow duration-300">
           <Image
             src={product.image}
             alt={product.name}
             fill
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-            className="object-cover group-hover:scale-105 transition-transform duration-300"
+            className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
           />
 
           {product.originalPrice && product.price !== null && (
-            <div className="absolute top-4 right-4 bg-brand-gold text-brand-black px-3 py-1 rounded text-xs font-bold">
+            <div className="absolute top-4 right-4 bg-brand-gold text-brand-black px-3 py-1 text-[10px] font-bold uppercase tracking-wider">
               -{calculateDiscount(product.originalPrice, product.price)}%
             </div>
           )}
 
           {!product.inStock && (
-            <div className="absolute inset-0 bg-brand-black/30 flex items-center justify-center">
-              <span className="text-brand-white font-semibold">Out of Stock</span>
+            <div className="absolute inset-0 bg-brand-black/40 flex items-center justify-center">
+              <span className="text-brand-white text-xs font-semibold uppercase tracking-[0.15em]">
+                Out of Stock
+              </span>
             </div>
           )}
         </div>
 
         {/* Product Info */}
         <div>
-          <h3 className="text-sm sm:text-base font-semibold mb-2 group-hover:text-brand-gold transition-colors">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-brand-gray-500 mb-1.5">
+            {product.category}
+          </p>
+          <h3 className="text-sm sm:text-base font-medium mb-2 group-hover:text-brand-gold transition-colors">
             {product.name}
           </h3>
 
@@ -60,7 +65,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
           {/* Price */}
           <div className="flex items-baseline space-x-2">
-            <span className="text-base sm:text-lg font-bold">
+            <span className="text-base sm:text-lg font-semibold">
               {formatPrice(product.price)}
             </span>
             {product.originalPrice && (

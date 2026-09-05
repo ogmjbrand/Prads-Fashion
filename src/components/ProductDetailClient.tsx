@@ -112,7 +112,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
               </div>
 
               {/* Main Image / 3D Viewer */}
-              <div className="relative mb-4 bg-brand-cream rounded-lg overflow-hidden aspect-square">
+              <div className="relative mb-4 bg-brand-cream overflow-hidden aspect-square">
                 {view === 'photo' ? (
                   <Image
                     src={mainImage}
@@ -133,7 +133,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
                   <button
                     key={index}
                     onClick={() => setMainImage(image)}
-                    className={`relative bg-brand-cream rounded-lg overflow-hidden aspect-square border-2 transition-all ${
+                    className={`relative bg-brand-cream overflow-hidden aspect-square border-2 transition-all ${
                       mainImage === image ? 'border-brand-gold' : 'border-transparent'
                     }`}
                   >
@@ -331,7 +331,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
               <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
                 {relatedProducts.map((relatedProduct) => (
                   <Link key={relatedProduct.id} href={`/product/${relatedProduct.id}`} className="cursor-pointer group block">
-                    <div className="relative mb-4 bg-brand-white rounded-lg overflow-hidden aspect-square">
+                    <div className="relative mb-4 bg-brand-white overflow-hidden aspect-square">
                       <Image
                         src={relatedProduct.image}
                         alt={relatedProduct.name}
