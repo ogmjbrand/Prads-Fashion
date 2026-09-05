@@ -8,6 +8,8 @@ export interface Product {
   category: string;
   image: string;
   images: string[];
+  /** Background-removed PNG for use on colored surfaces (e.g. the homepage hero). Optional — falls back to `image` when absent. */
+  cutoutImage?: string;
   sizes?: string[];
   colors?: string[];
   inStock: boolean;

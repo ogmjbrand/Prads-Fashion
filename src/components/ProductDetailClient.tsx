@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import Image from 'next/image';
 import Header from '@/components/Header';
@@ -10,8 +11,18 @@ import { products } from '@/data/products';
 import { formatPrice, generateWhatsAppMessage, generateWhatsAppLink } from '@/utils/formatting';
 import { BRAND } from '@/utils/constants';
 import { useCart } from '@/hooks/useCart';
-import { Minus, Plus, Heart } from 'lucide-react';
+import { Minus, Plus, Heart, Box } from 'lucide-react';
 import { Product } from '@/types/product';
+import { gsap } from '@/lib/gsap';
+
+const ProductViewer3D = dynamic(() => import('@/components/ProductViewer3D'), {
+  ssr: false,
+  loading: () => (
+    <div className="flex items-center justify-center h-full">
+      <p className="text-sm text-brand-gray-500">Loading 3D view...</p>
+    </div>
+  ),
+});
 
 export default function ProductDetailClient({ product }: { product: Product }) {
   const { addItem } = useCart();
@@ -21,10 +32,19 @@ export default function ProductDetailClient({ product }: { product: Product }) {
   const [selectedColor, setSelectedColor] = useState(product.colors?.[0]);
   const [mainImage, setMainImage] = useState(product.image);
   const [isAddedToCart, setIsAddedToCart] = useState(false);
+  const [view, setView] = useState<'photo' | '3d'>('photo');
+  const addToCartBtnRef = useRef<HTMLButtonElement>(null);
 
   const handleAddToCart = () => {
     addItem(product, quantity, selectedSize, selectedColor);
     setIsAddedToCart(true);
+    if (addToCartBtnRef.current) {
+      gsap.fromTo(
+        addToCartBtnRef.current,
+        { scale: 0.94 },
+        { scale: 1, duration: 0.35, ease: 'back.out(4)' }
+      );
+    }
     setTimeout(() => setIsAddedToCart(false), 2000);
   };
 
@@ -70,16 +90,41 @@ export default function ProductDetailClient({ product }: { product: Product }) {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
             {/* Images */}
             <div className="order-2 lg:order-1">
-              {/* Main Image */}
+              {/* View toggle */}
+              <div className="flex gap-2 mb-4">
+                <button
+                  onClick={() => setView('photo')}
+                  className={`px-4 py-2 text-sm font-semibold rounded transition-colors ${
+                    view === 'photo' ? 'bg-brand-black text-brand-white' : 'bg-brand-cream text-brand-gray-600'
+                  }`}
+                >
+                  Photos
+                </button>
+                <button
+                  onClick={() => setView('3d')}
+                  className={`px-4 py-2 text-sm font-semibold rounded transition-colors flex items-center gap-1.5 ${
+                    view === '3d' ? 'bg-brand-black text-brand-white' : 'bg-brand-cream text-brand-gray-600'
+                  }`}
+                >
+                  <Box className="w-4 h-4" />
+                  Interactive View
+                </button>
+              </div>
+
+              {/* Main Image / 3D Viewer */}
               <div className="relative mb-4 bg-brand-cream rounded-lg overflow-hidden aspect-square">
-                <Image
-                  src={mainImage}
-                  alt={product.name}
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover"
-                />
+                {view === 'photo' ? (
+                  <Image
+                    src={mainImage}
+                    alt={product.name}
+                    fill
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover"
+                  />
+                ) : (
+                  <ProductViewer3D image={mainImage} />
+                )}
               </div>
 
               {/* Thumbnail Images */}
@@ -231,6 +276,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
                 {/* Buttons */}
                 <div className="space-y-3">
                   <Button
+                    ref={addToCartBtnRef}
                     variant="primary"
                     size="lg"
                     fullWidth

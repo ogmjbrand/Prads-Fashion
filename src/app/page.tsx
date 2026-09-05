@@ -5,6 +5,9 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Button from '@/components/Button';
 import ProductCard from '@/components/ProductCard';
+import ScrollReveal from '@/components/ScrollReveal';
+import HeroSceneClient from '@/components/HeroSceneClient';
+import BlobHero from '@/components/BlobHero';
 import { products } from '@/data/products';
 import { BRAND, SOCIAL_MEDIA } from '@/utils/constants';
 
@@ -33,7 +36,10 @@ export default function Home() {
       <main className="bg-brand-white">
         {/* Hero Section */}
         <section className="relative bg-brand-black text-brand-white overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32">
+          <div className="absolute inset-0 opacity-40 pointer-events-none">
+            <HeroSceneClient />
+          </div>
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               {/* Text */}
               <div className="order-2 lg:order-1">
@@ -81,16 +87,9 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Hero Image */}
-              <div className="order-1 lg:order-2 relative aspect-square rounded-lg overflow-hidden">
-                <Image
-                  src="/products/flap-bag-rainbow-stripe.webp"
-                  alt="Handcrafted PRADSFASHION rainbow stripe flap bag"
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover"
-                />
+              {/* Hero Product Showcase */}
+              <div className="order-1 lg:order-2">
+                <BlobHero products={featuredProducts} />
               </div>
             </div>
           </div>
@@ -98,16 +97,21 @@ export default function Home() {
 
         {/* Featured Products */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24" id="featured">
-          <div className="mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-2">Featured Collection</h2>
-            <p className="text-brand-gray-600">Curated pieces for the modern wardrobe</p>
-          </div>
+          <ScrollReveal>
+            <div className="mb-12">
+              <h2 className="text-3xl sm:text-4xl font-bold mb-2">Featured Collection</h2>
+              <p className="text-brand-gray-600">Curated pieces for the modern wardrobe</p>
+            </div>
+          </ScrollReveal>
 
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <ScrollReveal
+            className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
+            stagger={0.08}
+          >
             {featuredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
-          </div>
+          </ScrollReveal>
 
           <div className="mt-12 text-center">
             <Link href="/shop">
@@ -119,12 +123,14 @@ export default function Home() {
         {/* Shop by Category */}
         <section className="bg-brand-cream py-16 sm:py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold mb-2">Shop by Category</h2>
-              <p className="text-brand-gray-600">Find exactly what you&apos;re looking for</p>
-            </div>
+            <ScrollReveal>
+              <div className="mb-12">
+                <h2 className="text-3xl sm:text-4xl font-bold mb-2">Shop by Category</h2>
+                <p className="text-brand-gray-600">Find exactly what you&apos;re looking for</p>
+              </div>
+            </ScrollReveal>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <ScrollReveal className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" stagger={0.08}>
               {shopCategories.map((category) => (
                 <Link
                   key={category.name}
@@ -145,33 +151,40 @@ export default function Home() {
                   </div>
                 </Link>
               ))}
-            </div>
+            </ScrollReveal>
           </div>
         </section>
 
         {/* Best Sellers */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-          <div className="mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-2">Best Sellers</h2>
-            <p className="text-brand-gray-600">Customer favorites and most loved pieces</p>
-          </div>
+          <ScrollReveal>
+            <div className="mb-12">
+              <h2 className="text-3xl sm:text-4xl font-bold mb-2">Best Sellers</h2>
+              <p className="text-brand-gray-600">Customer favorites and most loved pieces</p>
+            </div>
+          </ScrollReveal>
 
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          <ScrollReveal
+            className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
+            stagger={0.08}
+          >
             {bestSellers.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
-          </div>
+          </ScrollReveal>
         </section>
 
         {/* Why PRADSFASHION */}
         <section className="bg-brand-black text-brand-white py-16 sm:py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="mb-12 text-center">
-              <h2 className="text-3xl sm:text-4xl font-bold mb-2">Why Choose PRADSFASHION</h2>
-              <p className="text-brand-gray-300">Dedicated to quality, style, and your satisfaction</p>
-            </div>
+            <ScrollReveal>
+              <div className="mb-12 text-center">
+                <h2 className="text-3xl sm:text-4xl font-bold mb-2">Why Choose PRADSFASHION</h2>
+                <p className="text-brand-gray-300">Dedicated to quality, style, and your satisfaction</p>
+              </div>
+            </ScrollReveal>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <ScrollReveal className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" stagger={0.1}>
               {[
                 {
                   title: 'Premium Quality',
@@ -198,24 +211,26 @@ export default function Home() {
                   <p className="text-brand-gray-300 text-sm">{benefit.description}</p>
                 </div>
               ))}
-            </div>
+            </ScrollReveal>
           </div>
         </section>
 
         {/* Testimonials */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-          <div className="mb-12 text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-2">Customer Reviews</h2>
-            <p className="text-brand-gray-600">What our customers are saying</p>
-          </div>
+          <ScrollReveal>
+            <div className="mb-12 text-center">
+              <h2 className="text-3xl sm:text-4xl font-bold mb-2">Customer Reviews</h2>
+              <p className="text-brand-gray-600">What our customers are saying</p>
+            </div>
 
-          <div className="bg-brand-cream p-10 rounded-lg text-center max-w-2xl mx-auto">
-            <p className="text-brand-gray-700 leading-relaxed">
-              We&apos;re just getting started — customer reviews will appear here as PRADSFASHION
-              grows. Shopped with us already? Share your experience via WhatsApp and we may
-              feature it.
-            </p>
-          </div>
+            <div className="bg-brand-cream p-10 rounded-lg text-center max-w-2xl mx-auto">
+              <p className="text-brand-gray-700 leading-relaxed">
+                We&apos;re just getting started — customer reviews will appear here as PRADSFASHION
+                grows. Shopped with us already? Share your experience via WhatsApp and we may
+                feature it.
+              </p>
+            </div>
+          </ScrollReveal>
         </section>
 
         {/* Instagram Feed (Social Proof) */}
@@ -256,7 +271,7 @@ export default function Home() {
 
         {/* Final CTA */}
         <section className="bg-brand-black text-brand-white py-16 sm:py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <ScrollReveal className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center" as="div">
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">Ready to Elevate Your Wardrobe?</h2>
             <p className="text-brand-gray-300 mb-8 max-w-2xl mx-auto">
               Explore our collection and discover premium fashion pieces that speak to your individual style.
@@ -266,7 +281,7 @@ export default function Home() {
                 Start Shopping Now
               </Button>
             </Link>
-          </div>
+          </ScrollReveal>
         </section>
       </main>
       <Footer />
