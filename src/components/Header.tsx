@@ -1,13 +1,27 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Menu, X, ShoppingBag } from 'lucide-react';
 import { useCart } from '@/hooks/useCart';
+import { gsap } from '@/lib/gsap';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const { count, isHydrated } = useCart();
+  const badgeRef = useRef<HTMLSpanElement>(null);
+  const prevCount = useRef(count);
+
+  useEffect(() => {
+    if (isHydrated && count > prevCount.current && badgeRef.current) {
+      gsap.fromTo(
+        badgeRef.current,
+        { scale: 1.6 },
+        { scale: 1, duration: 0.4, ease: 'back.out(3)' }
+      );
+    }
+    prevCount.current = count;
+  }, [count, isHydrated]);
 
   return (
     <header className="sticky top-0 z-50 bg-brand-white border-b border-brand-gray-200">
@@ -51,7 +65,10 @@ export default function Header() {
             >
               <ShoppingBag className="w-6 h-6" />
               {isHydrated && count > 0 && (
-                <span className="absolute -top-2 -right-2 bg-brand-gold text-brand-black text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                <span
+                  ref={badgeRef}
+                  className="absolute -top-2 -right-2 bg-brand-gold text-brand-black text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center"
+                >
                   {count}
                 </span>
               )}

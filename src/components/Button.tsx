@@ -1,6 +1,7 @@
 'use client';
 
-import React from 'react';
+import React, { useRef } from 'react';
+import { gsap } from '@/lib/gsap';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'outline';
@@ -8,15 +9,30 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   fullWidth?: boolean;
 }
 
-export default function Button({
-  variant = 'primary',
-  size = 'md',
-  fullWidth = false,
-  className = '',
-  children,
-  ...props
-}: ButtonProps) {
-  const baseClasses = 'font-semibold transition-all duration-200 rounded disabled:opacity-50 disabled:cursor-not-allowed';
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(function Button(
+  {
+    variant = 'primary',
+    size = 'md',
+    fullWidth = false,
+    className = '',
+    children,
+    onMouseEnter,
+    onMouseLeave,
+    onMouseDown,
+    onMouseUp,
+    ...props
+  },
+  forwardedRef
+) {
+  const innerRef = useRef<HTMLButtonElement | null>(null);
+
+  const setRefs = (node: HTMLButtonElement | null) => {
+    innerRef.current = node;
+    if (typeof forwardedRef === 'function') forwardedRef(node);
+    else if (forwardedRef) forwardedRef.current = node;
+  };
+
+  const baseClasses = 'font-semibold transition-colors duration-200 rounded disabled:opacity-50 disabled:cursor-not-allowed';
 
   const variantClasses = {
     primary: 'bg-brand-black text-brand-white hover:bg-brand-gray-800',
@@ -32,12 +48,36 @@ export default function Button({
 
   const widthClass = fullWidth ? 'w-full' : '';
 
+  const handleMouseEnter: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    if (innerRef.current) gsap.to(innerRef.current, { scale: 1.03, duration: 0.2, ease: 'power2.out' });
+    onMouseEnter?.(e);
+  };
+  const handleMouseLeave: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    if (innerRef.current) gsap.to(innerRef.current, { scale: 1, duration: 0.2, ease: 'power2.out' });
+    onMouseLeave?.(e);
+  };
+  const handleMouseDown: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    if (innerRef.current) gsap.to(innerRef.current, { scale: 0.97, duration: 0.1, ease: 'power2.out' });
+    onMouseDown?.(e);
+  };
+  const handleMouseUp: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    if (innerRef.current) gsap.to(innerRef.current, { scale: 1.03, duration: 0.15, ease: 'power2.out' });
+    onMouseUp?.(e);
+  };
+
   return (
     <button
+      ref={setRefs}
       className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${widthClass} ${className}`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
       {...props}
     >
       {children}
     </button>
   );
-}
+});
+
+export default Button;
