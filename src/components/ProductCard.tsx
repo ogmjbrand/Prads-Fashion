@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Star, ShoppingBag } from 'lucide-react';
+import { Star } from 'lucide-react';
 import { Product } from '@/types/product';
 import { formatPrice, calculateDiscount } from '@/utils/formatting';
 
