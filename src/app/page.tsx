@@ -7,6 +7,7 @@ import Button from '@/components/Button';
 import ProductCard from '@/components/ProductCard';
 import ScrollReveal from '@/components/ScrollReveal';
 import HeroSceneClient from '@/components/HeroSceneClient';
+import BlobHero from '@/components/BlobHero';
 import { products } from '@/data/products';
 import { BRAND, SOCIAL_MEDIA } from '@/utils/constants';
 
@@ -86,16 +87,9 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Hero Image */}
-              <div className="order-1 lg:order-2 relative aspect-square rounded-lg overflow-hidden">
-                <Image
-                  src="/products/flap-bag-rainbow-stripe.webp"
-                  alt="Handcrafted PRADSFASHION rainbow stripe flap bag"
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover"
-                />
+              {/* Hero Product Showcase */}
+              <div className="order-1 lg:order-2">
+                <BlobHero products={featuredProducts} />
               </div>
             </div>
           </div>
