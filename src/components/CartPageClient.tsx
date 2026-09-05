@@ -102,7 +102,7 @@ export default function CartPageClient() {
                         <h3 className="font-semibold mb-2">{item.product?.name}</h3>
                         {item.size && <p className="text-sm text-brand-gray-600">Size: {item.size}</p>}
                         {item.color && <p className="text-sm text-brand-gray-600">Color: {item.color}</p>}
-                        <p className="font-bold mt-2">{formatPrice(item.product?.price || 0)}</p>
+                        <p className="font-bold mt-2">{formatPrice(item.product?.price)}</p>
                       </div>
 
                       {/* Quantity and Remove */}
@@ -162,36 +162,39 @@ export default function CartPageClient() {
                 <div className="bg-brand-cream p-6 rounded-lg sticky top-24">
                   <h3 className="font-bold text-lg mb-6">Order Summary</h3>
 
-                  <div className="space-y-4 mb-6 border-b pb-6">
-                    <div className="flex justify-between text-sm">
-                      <span>Subtotal</span>
-                      <span>{formatPrice(subtotal)}</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span>Shipping</span>
-                      <span>{shipping === 0 ? 'FREE' : formatPrice(shipping)}</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span>Tax</span>
-                      <span>{formatPrice(tax)}</span>
-                    </div>
-                  </div>
-
-                  <div className="flex justify-between font-bold text-lg mb-6">
-                    <span>Total</span>
-                    <span>{formatPrice(total)}</span>
-                  </div>
-
-                  {hasPriceOnRequest && (
-                    <p className="text-xs text-brand-gray-600 mb-4">
-                      One or more items are price-on-request — final total will be confirmed via WhatsApp.
+                  {hasPriceOnRequest ? (
+                    <p className="text-sm text-brand-gray-600 mb-6 border-b pb-6">
+                      One or more items are price-on-request, so shipping and tax can&apos;t be
+                      calculated yet. PRADSFASHION will confirm your full order total on WhatsApp.
                     </p>
-                  )}
+                  ) : (
+                    <>
+                      <div className="space-y-4 mb-6 border-b pb-6">
+                        <div className="flex justify-between text-sm">
+                          <span>Subtotal</span>
+                          <span>{formatPrice(subtotal)}</span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span>Shipping</span>
+                          <span>{shipping === 0 ? 'FREE' : formatPrice(shipping)}</span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span>Tax</span>
+                          <span>{formatPrice(tax)}</span>
+                        </div>
+                      </div>
 
-                  {subtotal < FREE_SHIPPING_THRESHOLD && (
-                    <p className="text-xs text-brand-gray-600 mb-4">
-                      Free shipping on orders over {formatPrice(FREE_SHIPPING_THRESHOLD)}
-                    </p>
+                      <div className="flex justify-between font-bold text-lg mb-6">
+                        <span>Total</span>
+                        <span>{formatPrice(total)}</span>
+                      </div>
+
+                      {subtotal < FREE_SHIPPING_THRESHOLD && (
+                        <p className="text-xs text-brand-gray-600 mb-4">
+                          Free shipping on orders over {formatPrice(FREE_SHIPPING_THRESHOLD)}
+                        </p>
+                      )}
+                    </>
                   )}
 
                   <Link href="/checkout" className="block mb-3">

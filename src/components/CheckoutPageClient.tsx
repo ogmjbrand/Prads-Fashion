@@ -240,40 +240,51 @@ export default function CheckoutPageClient() {
                 <h3 className="font-bold text-lg mb-6">Order Summary</h3>
                 <div className="space-y-4 mb-6 border-b pb-6 max-h-64 overflow-y-auto">
                   {cartItems.map((item) => (
-                    <div key={`${item.productId}-${item.size}-${item.color}`} className="flex justify-between text-sm">
-                      <span className="pr-2">
+                    <div key={`${item.productId}-${item.size}-${item.color}`} className="flex justify-between items-start gap-3 text-sm">
+                      <span className="min-w-0">
                         {item.product?.name} x{item.quantity}
                       </span>
-                      <span className="whitespace-nowrap font-medium">
-                        {formatPrice((item.product?.price || 0) * item.quantity)}
+                      <span className="shrink-0 whitespace-nowrap font-medium">
+                        {item.product?.price != null
+                          ? formatPrice(item.product.price * item.quantity)
+                          : formatPrice(null)}
                       </span>
                     </div>
                   ))}
                 </div>
-                <div className="space-y-3 mb-6 border-b pb-6">
-                  <div className="flex justify-between text-sm">
-                    <span>Subtotal</span>
-                    <span>{formatPrice(subtotal)}</span>
+                {hasPriceOnRequest ? (
+                  <div className="mb-6 border-b pb-6 text-sm text-brand-gray-600">
+                    One or more items are price-on-request, so shipping and tax can&apos;t be
+                    calculated yet. PRADSFASHION will confirm your full order total on WhatsApp.
                   </div>
-                  <div className="flex justify-between text-sm">
-                    <span>Shipping</span>
-                    <span>{shipping === 0 ? 'FREE' : formatPrice(shipping)}</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span>Tax</span>
-                    <span>{formatPrice(tax)}</span>
-                  </div>
-                </div>
-                <div className="flex justify-between font-bold text-lg mb-6">
-                  <span>Total</span>
-                  <span>{formatPrice(total)}</span>
-                </div>
+                ) : (
+                  <>
+                    <div className="space-y-3 mb-6 border-b pb-6">
+                      <div className="flex justify-between text-sm">
+                        <span>Subtotal</span>
+                        <span>{formatPrice(subtotal)}</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span>Shipping</span>
+                        <span>{shipping === 0 ? 'FREE' : formatPrice(shipping)}</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span>Tax</span>
+                        <span>{formatPrice(tax)}</span>
+                      </div>
+                    </div>
+                    <div className="flex justify-between font-bold text-lg mb-6">
+                      <span>Total</span>
+                      <span>{formatPrice(total)}</span>
+                    </div>
+                  </>
+                )}
                 <Button variant="secondary" fullWidth onClick={handlePlaceOrder}>
                   Place Order via WhatsApp
                 </Button>
                 <p className="text-xs text-brand-gray-600 mt-3 text-center">
                   {hasPriceOnRequest
-                    ? 'Some items are price-on-request — you’ll confirm the final total and delivery with PRADSFASHION on WhatsApp.'
+                    ? 'You’ll confirm the final total and delivery with PRADSFASHION on WhatsApp.'
                     : 'You’ll confirm final payment and delivery with PRADSFASHION on WhatsApp.'}
                 </p>
               </div>
