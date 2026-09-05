@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
+import Image from 'next/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Button from '@/components/Button';
@@ -7,18 +9,23 @@ import { products } from '@/data/products';
 import { BRAND, SOCIAL_MEDIA } from '@/utils/constants';
 
 export const metadata: Metadata = {
-  title: 'PRADSFASHION | Premium Fashion for the Confident Individual',
-  description: 'Discover premium, elegant fashion. Shop our collection of blazers, trousers, denim, and accessories.',
+  title: 'PRADSFASHION | Handcrafted Bags & Ankara Fashion',
+  description: 'Discover PRADSFASHION’s handcrafted bags and Ankara-print pieces, made by Angel Anifowoshe.',
   openGraph: {
-    title: 'PRADSFASHION | Premium Fashion',
-    description: 'Discover premium, elegant fashion.',
-    images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
+    title: 'PRADSFASHION | Handcrafted Bags & Ankara Fashion',
+    description: 'Discover PRADSFASHION’s handcrafted bags and Ankara-print pieces.',
+    images: [{ url: '/products/flap-bag-rainbow-stripe.webp', width: 1200, height: 1200 }],
   },
 };
 
 export default function Home() {
   const featuredProducts = products.filter((p) => p.featured).slice(0, 4);
   const bestSellers = products.slice(0, 3);
+
+  const shopCategories = Array.from(new Set(products.map((p) => p.category))).map((name) => ({
+    name,
+    image: products.find((p) => p.category === name)?.image ?? '',
+  }));
 
   return (
     <>
@@ -41,51 +48,48 @@ export default function Home() {
                 </h1>
                 
                 <p className="text-lg text-brand-gray-300 mb-8 leading-relaxed">
-                  Premium fashion for the confident individual. Discover curated collections designed for quality, elegance, and timeless sophistication.
+                  Handcrafted bags and Ankara-print fashion, made by Angel Anifowoshe for the confident individual.
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Button
-                    variant="secondary"
-                    size="lg"
-                    className="text-center"
-                    onClick={() => window.location.href = '/shop'}
-                  >
-                    Shop Now
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="text-center border-brand-white text-brand-white hover:bg-brand-white hover:text-brand-black"
-                    onClick={() => window.location.href = '/shop#featured'}
-                  >
-                    Explore Collection
-                  </Button>
+                  <Link href="/shop">
+                    <Button variant="secondary" size="lg" className="text-center w-full">
+                      Shop Now
+                    </Button>
+                  </Link>
+                  <Link href="/shop#featured">
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      className="text-center w-full border-brand-white text-brand-white hover:bg-brand-white hover:text-brand-black"
+                    >
+                      Explore Collection
+                    </Button>
+                  </Link>
                 </div>
 
                 {/* Trust Signals */}
-                <div className="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-brand-gray-700">
+                <div className="grid grid-cols-2 gap-6 mt-12 pt-8 border-t border-brand-gray-700">
                   <div>
-                    <div className="text-2xl font-bold text-brand-gold">100%</div>
-                    <p className="text-xs text-brand-gray-400">Quality Assured</p>
+                    <div className="text-2xl font-bold text-brand-gold">Handcrafted</div>
+                    <p className="text-xs text-brand-gray-400">Made with care</p>
                   </div>
                   <div>
-                    <div className="text-2xl font-bold text-brand-gold">48hrs</div>
-                    <p className="text-xs text-brand-gray-400">Fast Dispatch</p>
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-brand-gold">24/7</div>
-                    <p className="text-xs text-brand-gray-400">Customer Support</p>
+                    <div className="text-2xl font-bold text-brand-gold">WhatsApp</div>
+                    <p className="text-xs text-brand-gray-400">Direct ordering support</p>
                   </div>
                 </div>
               </div>
 
               {/* Hero Image */}
-              <div className="order-1 lg:order-2">
-                <img
-                  src="https://images.unsplash.com/photo-1556821552-5a63fe0ae5e9?w=600&q=80"
-                  alt="Premium Fashion"
-                  className="w-full h-auto rounded-lg"
+              <div className="order-1 lg:order-2 relative aspect-square rounded-lg overflow-hidden">
+                <Image
+                  src="/products/flap-bag-rainbow-stripe.webp"
+                  alt="Handcrafted PRADSFASHION rainbow stripe flap bag"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
                 />
               </div>
             </div>
@@ -106,12 +110,9 @@ export default function Home() {
           </div>
 
           <div className="mt-12 text-center">
-            <Button
-              variant="outline"
-              onClick={() => window.location.href = '/shop'}
-            >
-              View All Products
-            </Button>
+            <Link href="/shop">
+              <Button variant="outline">View All Products</Button>
+            </Link>
           </div>
         </section>
 
@@ -120,32 +121,29 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-12">
               <h2 className="text-3xl sm:text-4xl font-bold mb-2">Shop by Category</h2>
-              <p className="text-brand-gray-600">Find exactly what you're looking for</p>
+              <p className="text-brand-gray-600">Find exactly what you&apos;re looking for</p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[
-                { name: 'Blazers', image: 'https://images.unsplash.com/photo-1591047990857-e627b92f94d3?w=400&q=80' },
-                { name: 'Trousers', image: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400&q=80' },
-                { name: 'Knitwear', image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&q=80' },
-                { name: 'Accessories', image: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400&q=80' },
-              ].map((category) => (
-                <button
+              {shopCategories.map((category) => (
+                <Link
                   key={category.name}
-                  onClick={() => window.location.href = `/shop?category=${category.name.toLowerCase()}`}
-                  className="group overflow-hidden rounded-lg"
+                  href={`/shop?category=${encodeURIComponent(category.name)}`}
+                  className="group overflow-hidden rounded-lg block"
                 >
                   <div className="relative h-64 overflow-hidden">
-                    <img
+                    <Image
                       src={category.image}
                       alt={category.name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      className="object-cover group-hover:scale-110 transition-transform duration-300"
                     />
                     <div className="absolute inset-0 bg-brand-black/30 group-hover:bg-brand-black/50 transition-colors flex items-center justify-center">
                       <span className="text-brand-white text-lg font-bold">{category.name}</span>
                     </div>
                   </div>
-                </button>
+                </Link>
               ))}
             </div>
           </div>
@@ -185,7 +183,7 @@ export default function Home() {
                 },
                 {
                   title: 'Customer Focused',
-                  description: 'Dedicated support available 24/7 via WhatsApp and email.',
+                  description: 'Reach us directly via WhatsApp or email with questions before and after you order.',
                 },
                 {
                   title: 'Secure & Convenient',
@@ -211,34 +209,12 @@ export default function Home() {
             <p className="text-brand-gray-600">What our customers are saying</p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                name: 'Sarah M.',
-                text: 'The quality is exceptional. Every piece feels premium and the fit is perfect. Highly recommend!',
-                rating: 5,
-              },
-              {
-                name: 'James K.',
-                text: 'Fast shipping and beautiful packaging. Customer service was incredibly helpful.',
-                rating: 5,
-              },
-              {
-                name: 'Emma L.',
-                text: 'Finally found a fashion brand that understands quality and style. Will definitely order again.',
-                rating: 5,
-              },
-            ].map((review, index) => (
-              <div key={index} className="bg-brand-cream p-6 rounded-lg">
-                <div className="flex mb-4">
-                  {[...Array(review.rating)].map((_, i) => (
-                    <span key={i} className="text-brand-gold text-lg">★</span>
-                  ))}
-                </div>
-                <p className="text-brand-gray-700 mb-4 leading-relaxed">"{review.text}"</p>
-                <p className="font-semibold text-brand-black">{review.name}</p>
-              </div>
-            ))}
+          <div className="bg-brand-cream p-10 rounded-lg text-center max-w-2xl mx-auto">
+            <p className="text-brand-gray-700 leading-relaxed">
+              We&apos;re just getting started — customer reviews will appear here as PRADSFASHION
+              grows. Shopped with us already? Share your experience via WhatsApp and we may
+              feature it.
+            </p>
           </div>
         </section>
 
@@ -285,13 +261,11 @@ export default function Home() {
             <p className="text-brand-gray-300 mb-8 max-w-2xl mx-auto">
               Explore our collection and discover premium fashion pieces that speak to your individual style.
             </p>
-            <Button
-              variant="secondary"
-              size="lg"
-              onClick={() => window.location.href = '/shop'}
-            >
-              Start Shopping Now
-            </Button>
+            <Link href="/shop">
+              <Button variant="secondary" size="lg">
+                Start Shopping Now
+              </Button>
+            </Link>
           </div>
         </section>
       </main>

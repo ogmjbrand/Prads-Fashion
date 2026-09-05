@@ -29,18 +29,13 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/shop?category=blazers" className="text-brand-gray-400 hover:text-brand-white text-sm">
-                  Blazers
+                <Link href="/shop?category=Flap+Bags" className="text-brand-gray-400 hover:text-brand-white text-sm">
+                  Flap Bags
                 </Link>
               </li>
               <li>
-                <Link href="/shop?category=dresses" className="text-brand-gray-400 hover:text-brand-white text-sm">
-                  Dresses
-                </Link>
-              </li>
-              <li>
-                <Link href="/shop?category=accessories" className="text-brand-gray-400 hover:text-brand-white text-sm">
-                  Accessories
+                <Link href="/shop?category=Ready-to-Wear" className="text-brand-gray-400 hover:text-brand-white text-sm">
+                  Ready-to-Wear
                 </Link>
               </li>
             </ul>

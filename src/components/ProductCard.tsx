@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Star, ShoppingBag } from 'lucide-react';
+import { Star } from 'lucide-react';
 import { Product } from '@/types/product';
 import { formatPrice, calculateDiscount } from '@/utils/formatting';
 
@@ -14,13 +14,15 @@ export default function ProductCard({ product }: ProductCardProps) {
       <div className="group cursor-pointer">
         {/* Image Container */}
         <div className="relative mb-4 bg-brand-cream overflow-hidden aspect-square">
-          <img
+          <Image
             src={product.image}
             alt={product.name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            fill
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            className="object-cover group-hover:scale-105 transition-transform duration-300"
           />
-          
-          {product.originalPrice && (
+
+          {product.originalPrice && product.price !== null && (
             <div className="absolute top-4 right-4 bg-brand-gold text-brand-black px-3 py-1 rounded text-xs font-bold">
               -{calculateDiscount(product.originalPrice, product.price)}%
             </div>
