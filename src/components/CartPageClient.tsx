@@ -6,12 +6,12 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Button from '@/components/Button';
 import { useCart } from '@/hooks/useCart';
-import { products } from '@/data/products';
+import { Product } from '@/types/product';
 import { formatPrice, generateWhatsAppMessage, generateWhatsAppLink } from '@/utils/formatting';
 import { BRAND, SHIPPING_COST, FREE_SHIPPING_THRESHOLD, TAX_RATE } from '@/utils/constants';
 import { Trash2, Plus, Minus } from 'lucide-react';
 
-export default function CartPageClient() {
+export default function CartPageClient({ products }: { products: Product[] }) {
   const { items, removeItem, updateQuantity, isHydrated } = useCart();
 
   const cartItems = items.map((item) => {

@@ -5,7 +5,8 @@ import { useSearchParams } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ProductCard from '@/components/ProductCard';
-import { products, categories } from '@/data/products';
+import { categories } from '@/lib/products';
+import { Product } from '@/types/product';
 import { Search } from 'lucide-react';
 
 type SortOption = 'featured' | 'price-asc' | 'price-desc' | 'name';
@@ -17,15 +18,15 @@ const PRICE_RANGES = [
   { label: '$200+', test: (price: number) => price > 200 },
 ];
 
-export default function ShopPageClient() {
+export default function ShopPageClient({ products }: { products: Product[] }) {
   return (
     <Suspense fallback={null}>
-      <ShopContent />
+      <ShopContent products={products} />
     </Suspense>
   );
 }
 
-function ShopContent() {
+function ShopContent({ products }: { products: Product[] }) {
   const searchParams = useSearchParams();
   const initialCategory = searchParams.get('category') || 'All';
 
@@ -69,7 +70,7 @@ function ShopContent() {
     }
 
     return result;
-  }, [search, selectedCategory, selectedRanges, inStockOnly, sort]);
+  }, [products, search, selectedCategory, selectedRanges, inStockOnly, sort]);
 
   return (
     <>

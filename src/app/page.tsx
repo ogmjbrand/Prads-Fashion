@@ -8,8 +8,10 @@ import ProductCard from '@/components/ProductCard';
 import ScrollReveal from '@/components/ScrollReveal';
 import HeroSceneClient from '@/components/HeroSceneClient';
 import BlobHero from '@/components/BlobHero';
-import { products } from '@/data/products';
+import { getProducts } from '@/lib/products';
 import { BRAND, SOCIAL_MEDIA } from '@/utils/constants';
+
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: 'PRADSFASHION | Handcrafted Bags & Ankara Fashion',
@@ -21,7 +23,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Home() {
+export default async function Home() {
+  const products = await getProducts();
   const featuredProducts = products.filter((p) => p.featured).slice(0, 4);
   const bestSellers = products.slice(0, 3);
 

@@ -8,7 +8,7 @@ import Button from '@/components/Button';
 import Input from '@/components/Input';
 import PaymentGateway from '@/components/PaymentGateway';
 import { useCart } from '@/hooks/useCart';
-import { products } from '@/data/products';
+import { Product } from '@/types/product';
 import { formatPrice, generateWhatsAppMessage, generateWhatsAppLink } from '@/utils/formatting';
 import { BRAND, SHIPPING_COST, FREE_SHIPPING_THRESHOLD, TAX_RATE } from '@/utils/constants';
 import { CheckCircle2 } from 'lucide-react';
@@ -33,7 +33,7 @@ const emptyForm: FormState = {
   notes: '',
 };
 
-export default function CheckoutPageClient() {
+export default function CheckoutPageClient({ products }: { products: Product[] }) {
   const { items, clearCart, isHydrated } = useCart();
   const [form, setForm] = useState<FormState>(emptyForm);
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});

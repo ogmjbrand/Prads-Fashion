@@ -7,7 +7,6 @@ import Image from 'next/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Button from '@/components/Button';
-import { products } from '@/data/products';
 import { formatPrice, generateWhatsAppMessage, generateWhatsAppLink } from '@/utils/formatting';
 import { BRAND } from '@/utils/constants';
 import { useCart } from '@/hooks/useCart';
@@ -24,7 +23,12 @@ const ProductViewer3D = dynamic(() => import('@/components/ProductViewer3D'), {
   ),
 });
 
-export default function ProductDetailClient({ product }: { product: Product }) {
+interface ProductDetailClientProps {
+  product: Product;
+  allProducts: Product[];
+}
+
+export default function ProductDetailClient({ product, allProducts }: ProductDetailClientProps) {
   const { addItem } = useCart();
 
   const [quantity, setQuantity] = useState(1);
@@ -57,7 +61,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
     window.open(link, '_blank');
   };
 
-  const relatedProducts = products
+  const relatedProducts = allProducts
     .filter((p) => p.category === product.category && p.id !== product.id)
     .slice(0, 4);
 
